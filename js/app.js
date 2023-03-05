@@ -22,6 +22,9 @@ const Ai= data=>{
                   ${element.features.map(a=> `<li> ${a}</li>`)}
                   </ol>
                 </div>
+                <hr class="mx-3">
+                <h5 class="mx-3">${element.name}</h5>
+                <P class="ms-3"><i class="fa-solid fa-calendar-days"></i> ${element.published_in}</P>
               </div>
         
         `
@@ -29,4 +32,3 @@ const Ai= data=>{
     });
 }
 
-loadAi();
