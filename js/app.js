@@ -28,9 +28,9 @@ const Ai = (data, limit) => {
                 <div class="d-flex justify-content-between align-items-center mb-2 me-2"><P class="ms-3"><i class="fa-solid fa-calendar-days"></i> ${
                   element.published_in
                 }</P>
-                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchDetails('${
+                <a href="#" class="btn bg-danger rounded-circle bg-opacity-10 text-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchDetails('${
                   element.id
-                }')">Go somewhere</a>
+                }')"><i class="fa-sharp fa-solid fa-arrow-right"></i></a>
                 </div>
               </div>
         
