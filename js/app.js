@@ -75,73 +75,58 @@ const showDetails=data=>{
   const a=[];
   for (const key in data.data.features) {
     a.push(data.data.features[key].feature_name);
-    console.log(data.data.features[key].feature_name);
+    // console.log(data.data.features[key].feature_name);
   }
+
   
   const modalElement=document.getElementById('modalContent');
+  modalElement.innerText='';
   const modalContent=document.createElement('div');
   modalContent.classList.add('modal-body')
   modalContent.innerHTML=`
   
-              <div class="d-flex gap-3">
+              <div class="row  px-5 py-5">
                 <!-- first card -->
-                <div class="card">
+                <div class="col ">
+                <div class="card bg-danger bg-opacity-10 ">
 
                   <div class="card-body">
-                    <h5 class="card-title">${data.data.description}</h5>
-                    <div class="d-flex">
-                      <div>$10/month Basic</div>
-                      <div>$10/month Basic</div>
-                      <div>$10/month Basic</div>
+                    <h5 class="card-title pb-3 fs-5">${data.data.description}</h5>
+                    <div class="d-flex gap-2 my-2 text-center  ">
+                      <div class="bg-light rounded text-success fw-semibold  px-2 py-2">${data.data.pricing?data.data.pricing[0].price:'no price'} ${data.data.pricing?data.data.pricing[0].plan:'no plan'}</div>
+                      <div class="bg-light rounded text-warning fw-semibold px-2 py-2">${data.data.pricing?data.data.pricing[1].price:'no price'} ${data.data.pricing?data.data.pricing[1].plan:'no plan'}</div>
+                      <div  class="bg-light rounded text-danger fw-semibold px-2 py-2">${data.data.pricing?data.data.pricing[2].price:'no price'} ${data.data.pricing?data.data.pricing[2].plan:'no plan'}</div>
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex mt-3 justify-content-between">
                       <div>
-                        <h2 class="fs-5 fw-semibold">Features</h2>
+                        <h5 class=" fw-semibold">Features</h2>
                         <ul>
                         ${a.map(x=> `<li> ${x}</li>`).join('')}
                         </ul>
                       </div>
                       <div>
-                        <h2 class="fs-5 fw-semibold">Integrations</h2>
+                        <h5 class=" fw-semibold">Integrations</h2>
                         <ul>
-                          <li>Customizable responses</li>
-                          <li>Customizable responses</li>
-                          <li>Customizable responses</li>
+                        ${data.data.integrations?data.data.integrations.map(x=> `<li> ${x}</li>`).join(''):'not available'}
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
+                </div>
+                
                 <!-- 2nd card -->
-                <div>
-                  <div class="card">
+                <div class="col ">
+                  <div class="card ">
 
-                    <div class="card-body">
-                      <h5 class="card-title">ChatGPT is a large language model developed by OpenAI that can generate
-                        human-like responses in a conversation.</h5>
-                      <div class="d-flex">
-                        <div>$10/month Basic</div>
-                        <div>$10/month Basic</div>
-                        <div>$10/month Basic</div>
-                      </div>
-                      <div class="d-flex">
-                        <div>
-                          <h2 class="fs-5 fw-semibold">Features</h2>
-                          <ul>
-                            <li>Customizable responses</li>
-                            <li>Customizable responses</li>
-                            <li>Customizable responses</li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h2 class="fs-5 fw-semibold">Integrations</h2>
-                          <ul>
-                            <li>Customizable responses</li>
-                            <li>Customizable responses</li>
-                            <li>Customizable responses</li>
-                          </ul>
-                        </div>
-                      </div>
+                    <div class="card-body text-center ">
+                    <div>
+                    <img  src="${data.data.image_link[0]}" class="img-fluid rounded" alt="...">
+                    <h2 class="fs-5">${data.data.input_output_examples?data.data.input_output_examples[0].input:'not available'}</h2>
+                    <p>${data.data.input_output_examples?data.data.input_output_examples[0].output:'not available'}</p>
+                    </div>
+                   
+
                     </div>
                   </div>
                 </div>
