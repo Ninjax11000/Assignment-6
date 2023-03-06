@@ -60,7 +60,7 @@ document.getElementById("show-all-btn").addEventListener("click", function () {
 
 const fetchDetails = (id) => {
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
-  console.log(url);
+  // console.log(url);
   fetch(url)
     .then((res) => res.json())
     .then((data) => showDetails(data));
@@ -136,17 +136,17 @@ const showDetails = (data) => {
                 </div>
                 
                 <!-- 2nd card -->
-                <div class="col ">
+                <div class="col  " >
                   <div class="card ">
 
-                    <div class="card-body text-center ">
+                    <div class="card-body text-center " >
                     <div>
-                    <button type="button" class="btn btn-danger aButton  ">
-                      ${data.data.accuracy.score?data.data.accuracy.score*100:'blank'}  %accuracy
+                    <button id="accuracyBtn" type="button" class="btn btn-danger aButton ">
+                      ${data.data.accuracy.score?data.data.accuracy.score*100:'blank'}% accuracy
                       </button>
                     <img  src="${
                       data.data.image_link[0]
-                    }" class="img-fluid rounded" alt="...">
+                    }" class="img-fluid rounded" alt="..." onload="hideAccuracy(${data.data.accuracy.score})">
                     <h2 class="fs-5">${
                       data.data.input_output_examples
                         ? data.data.input_output_examples[0].input
@@ -172,3 +172,16 @@ const showDetails = (data) => {
   `;
   modalElement.appendChild(modalContent);
 };
+
+function hideAccuracy(data){
+  const accuracy=document.getElementById('accuracyBtn');
+  
+  if(data===null){
+    
+    accuracy.classList.add('d-none');
+  }
+  else{
+    accuracy.classList.remove('d-none');
+  }
+  
+}
