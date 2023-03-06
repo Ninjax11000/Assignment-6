@@ -4,3 +4,10 @@
     top: 20px;
     font-size:12px !important;
 }
+#modalClose{
+    background-color: red;
+    position: absolute;
+    padding: 10px;
+    left: -15px;
+    top: -15px;
+}
