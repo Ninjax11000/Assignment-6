@@ -150,12 +150,12 @@ const showDetails = (data) => {
                     <h2 class="fs-5">${
                       data.data.input_output_examples
                         ? data.data.input_output_examples[0].input
-                        : "not available"
+                        : "Can you give any example?"
                     }</h2>
                     <p>${
                       data.data.input_output_examples
                         ? data.data.input_output_examples[0].output
-                        : "not available"
+                        : "No! Not Yet! Take a break!!!"
                     }</p>
                     </div>
                    
@@ -184,4 +184,10 @@ function hideAccuracy(data){
     accuracy.classList.remove('d-none');
   }
   
+}
+
+const sortByDate=()=>{
+  fetch("https://openapi.programming-hero.com/api/ai/tools")
+  .then((res) => res.json())
+  .then((data) => (data.data.tools));
 }
