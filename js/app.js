@@ -7,7 +7,11 @@ const loadAi=()=>{
 
 const Ai= data=>{
     console.log(data);
+    toggleSpinner(true);
     const cardContainer=document.getElementById('card-container');
+    cardContainer.innerText='';
+  
+    data=data.slice(0,6);
     data.forEach(element => {
         console.log(element.features);
        
@@ -30,5 +34,16 @@ const Ai= data=>{
         `
         cardContainer.appendChild(cardDiv);
     });
+    toggleSpinner(false);
+}
+
+const toggleSpinner=isLoading=>{
+  const loaderSection=document.getElementById('loader');
+  if(isLoading){
+    loaderSection.classList.remove('d-none');
+  }
+  else{
+    loaderSection.classList.add('d-none');
+  }
 }
 
