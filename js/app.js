@@ -1,17 +1,18 @@
 const loadAi=()=>{
     fetch("https://openapi.programming-hero.com/api/ai/tools")
     .then(res=>res.json())
-    .then(data=>Ai(data.data.tools));
+    .then(data=>Ai(data.data.tools,1));
 
 }
 
-const Ai= data=>{
-    console.log(data);
+const Ai= (data,limit)=>{
     toggleSpinner(true);
     const cardContainer=document.getElementById('card-container');
     cardContainer.innerText='';
+    if(limit===1) data=data.slice(0,6);
+    else data=data;
   
-    data=data.slice(0,6);
+    
     data.forEach(element => {
         console.log(element.features);
        
@@ -47,3 +48,13 @@ const toggleSpinner=isLoading=>{
   }
 }
 
+document.getElementById('show-all-btn').addEventListener('click',function(){
+
+  fetch("https://openapi.programming-hero.com/api/ai/tools")
+  .then(res=>res.json())
+  .then(data=>Ai(data.data.tools,5));
+
+  const showBtn=document.getElementById('show-all-btn');
+  showBtn.classList.add('d-none');
+
+})
