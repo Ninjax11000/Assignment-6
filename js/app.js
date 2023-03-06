@@ -14,7 +14,7 @@ const Ai= (data,limit)=>{
   
     
     data.forEach(element => {
-        console.log(element.features);
+        
        
         const cardDiv=document.createElement('div');
         cardDiv.classList.add('col');
@@ -24,13 +24,13 @@ const Ai= (data,limit)=>{
                 <div class="card-body">
                   <h5 class="card-title">Features</h5>
                   <ol>
-                  ${element.features.map(a=> `<li> ${a}</li>`)}
+                  ${element.features.map(a=> `<li> ${a}</li>`).join('')}
                   </ol>
                 </div>
                 <hr class="mx-3">
                 <h5 class="mx-3">${element.name}</h5>
                 <div class="d-flex justify-content-between align-items-center mb-2 me-2"><P class="ms-3"><i class="fa-solid fa-calendar-days"></i> ${element.published_in}</P>
-                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Go somewhere</a>
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchDetails('${element.id}')">Go somewhere</a>
                 </div>
               </div>
         
@@ -60,3 +60,98 @@ document.getElementById('show-all-btn').addEventListener('click',function(){
   showBtn.classList.add('d-none');
 
 })
+
+const fetchDetails=id=>{
+  const url=`https://openapi.programming-hero.com/api/ai/tool/${id}`;
+  console.log(url);
+  fetch(url)
+  .then(res=>res.json())
+  .then(data=>showDetails(data));
+}
+
+const showDetails=data=>{
+
+  
+  const a=[];
+  for (const key in data.data.features) {
+    a.push(data.data.features[key].feature_name);
+    console.log(data.data.features[key].feature_name);
+  }
+  
+  const modalElement=document.getElementById('modalContent');
+  const modalContent=document.createElement('div');
+  modalContent.classList.add('modal-body')
+  modalContent.innerHTML=`
+  
+              <div class="d-flex gap-3">
+                <!-- first card -->
+                <div class="card">
+
+                  <div class="card-body">
+                    <h5 class="card-title">${data.data.description}</h5>
+                    <div class="d-flex">
+                      <div>$10/month Basic</div>
+                      <div>$10/month Basic</div>
+                      <div>$10/month Basic</div>
+                    </div>
+                    <div class="d-flex">
+                      <div>
+                        <h2 class="fs-5 fw-semibold">Features</h2>
+                        <ul>
+                        ${a.map(x=> `<li> ${x}</li>`).join('')}
+                        </ul>
+                      </div>
+                      <div>
+                        <h2 class="fs-5 fw-semibold">Integrations</h2>
+                        <ul>
+                          <li>Customizable responses</li>
+                          <li>Customizable responses</li>
+                          <li>Customizable responses</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 2nd card -->
+                <div>
+                  <div class="card">
+
+                    <div class="card-body">
+                      <h5 class="card-title">ChatGPT is a large language model developed by OpenAI that can generate
+                        human-like responses in a conversation.</h5>
+                      <div class="d-flex">
+                        <div>$10/month Basic</div>
+                        <div>$10/month Basic</div>
+                        <div>$10/month Basic</div>
+                      </div>
+                      <div class="d-flex">
+                        <div>
+                          <h2 class="fs-5 fw-semibold">Features</h2>
+                          <ul>
+                            <li>Customizable responses</li>
+                            <li>Customizable responses</li>
+                            <li>Customizable responses</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h2 class="fs-5 fw-semibold">Integrations</h2>
+                          <ul>
+                            <li>Customizable responses</li>
+                            <li>Customizable responses</li>
+                            <li>Customizable responses</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            
+  `
+  modalElement.appendChild(modalContent);
+
+}
